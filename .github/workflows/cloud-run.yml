@@ -45,15 +45,15 @@ jobs:
             # Configure gcloud CLI
             - name: gcloud Set up
               run: |
-                  gcloud config set project $RUN_PROJECT
+                  gcloud config set project  ${{ secrets.RUN_PROJECT}}
             # Build and push image to Google Container Registry
             - name: Build
               run: |
-                  gcloud builds submit -t gcr.io/$RUN_PROJECT/$SERVICE_NAME:$GITHUB_SHA
+                  gcloud builds submit -t gcr.io/${{ secrets.RUN_PROJECT}}/$SERVICE_NAME:$GITHUB_SHA
             # Deploy image to Cloud Run
             - name: Deploy
               run: |
                   gcloud run deploy $SERVICE_NAME \
                     --region $RUN_REGION \
-                    --image gcr.io/$RUN_PROJECT/$SERVICE_NAME:$GITHUB_SHA \
+                    --image gcr.io/${{ secrets.RUN_PROJECT}}/$SERVICE_NAME:$GITHUB_SHA \
                     --platform managed
