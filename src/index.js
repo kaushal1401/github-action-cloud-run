@@ -1,7 +1,7 @@
 const http = require('http');
 
 function requestHandler(req, res) {
-    res.write('Hello Google Cloud');
+    res.write('Hello Google Cloud test');
     res.end();
 }
 
